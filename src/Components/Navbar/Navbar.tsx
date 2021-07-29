@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { Toolbar, AppBar } from '@material-ui/core'
+import { Toolbar, AppBar, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Logo from './logo.png'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: '#fff',
-    marginRight: '1rem'
+    marginInline: '5px'
   }
 }))
 
@@ -20,6 +20,27 @@ export default function Navbar() {
       <AppBar position="static" variant="outlined">
         <Toolbar>
           <img src={Logo} width="50px" alt="brand_logo" />
+          <Typography
+            component={Link}
+            to="/home"
+            variant="h6"
+            className={cls.title}>
+            Home
+          </Typography>
+          <Typography
+            component={Link}
+            to="/catalogue"
+            variant="h6"
+            className={cls.title}>
+            Catalogo
+          </Typography>
+          <Typography
+            component={Link}
+            to="/product_detail"
+            variant="h6"
+            className={cls.title}>
+            Detalle de producto
+          </Typography>
         </Toolbar>
       </AppBar>
     </div>
