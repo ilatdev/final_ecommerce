@@ -13,12 +13,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const CoreLayout: React.FunctionComponent = (props) => {
+const CoreLayout: React.FC = ({ children }) => {
   const cls = useStyles()
   return (
     <Box className={cls.root}>
       <Navbar />
-      <Box className={cls.main}>{props.children}</Box>
+      <Box className={cls.main}>{children}</Box>
       <Footer />
     </Box>
   )

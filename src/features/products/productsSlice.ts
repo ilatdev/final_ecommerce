@@ -7,17 +7,30 @@ export const fetchProducts = createAsyncThunk(
   getProducts
 )
 
+export interface Offer {
+  expires_at: string
+  price: number
+}
+
+export interface Product {
+  currency: string
+  id: number
+  images: string[]
+  offer?: Offer
+  price: string
+  title: string
+}
+
 export interface ProductsState {
-  data: Object
+  data: Product[]
   status: 'idle' | 'pending' | 'succeeded' | 'failed'
 }
 
 const initialState: ProductsState = {
-  data: {},
+  data: [],
   status: 'idle'
 }
 
-// Then, handle actions in your reducers:
 const productSlice = createSlice({
   name: 'products',
   initialState,
