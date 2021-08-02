@@ -2,6 +2,9 @@ import { createTheme } from '@material-ui/core'
 
 const theme = createTheme({
   typography: {
+    allVariants: {
+      color: '#252525'
+    },
     fontFamily: [
       'Mulish',
       'Roboto',
@@ -15,6 +18,15 @@ const theme = createTheme({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"'
     ].join(',')
+  },
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        a: {
+          textDecoration: 'none'
+        }
+      }
+    }
   }
 })
 
