@@ -23,12 +23,12 @@ export interface Product {
 
 export interface ProductsState {
   data: Product[]
-  status: 'idle' | 'pending' | 'succeeded' | 'failed'
+  status: 'pending' | 'succeeded' | 'failed'
 }
 
 const initialState: ProductsState = {
   data: [],
-  status: 'idle'
+  status: 'pending'
 }
 
 const productSlice = createSlice({

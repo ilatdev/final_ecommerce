@@ -3,6 +3,7 @@ import { Box, makeStyles, Typography } from '@material-ui/core'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    height: 150,
     padding: theme.spacing(2),
     textAlign: 'center',
     borderTop: '1px solid #3333',
