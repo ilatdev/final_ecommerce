@@ -12,6 +12,7 @@ import { useAppDispatch } from './app/hooks'
 import { fetchProducts } from './features/products/productsSlice'
 import ProductDetailRoute from './Components/ProductDetailRoute'
 import { LoadingCircle } from './Components/LoadingCircle'
+import Catalogue from './Components/Catalogue/Catalogue'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -29,7 +30,7 @@ function App() {
               <ProductDetailRoute />
             </Route>
             <Route path="/catalogue">
-              <h1>Catalogue</h1>
+              <Catalogue />
             </Route>
             <Route path="/home">
               <Home />

@@ -34,13 +34,6 @@ export default function Navbar() {
             className={cls.title}>
             Catalogo
           </Typography>
-          <Typography
-            component={Link}
-            to="/product_detail"
-            variant="h6"
-            className={cls.title}>
-            Detalle de producto
-          </Typography>
         </Toolbar>
       </AppBar>
     </div>
