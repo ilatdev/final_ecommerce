@@ -16,8 +16,9 @@ export default function Footer() {
   const getYear = new Date()
   return (
     <Box className={cls.root}>
-      <Typography variant="subtitle2">
-        Final e-commerce © {getYear.getFullYear()}
+      <Typography variant="body2">
+        Copyright © Final e-commerce {getYear.getFullYear()}. All right
+        reserved.
       </Typography>
     </Box>
   )
