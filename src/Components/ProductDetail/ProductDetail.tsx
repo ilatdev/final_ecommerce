@@ -3,6 +3,7 @@ import React from 'react'
 import { Product } from '../../features/products/productsSlice'
 import ProductGallery from './ProductGallery'
 import moment from 'moment'
+import QuestionForm from './QuestionForm'
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     margin: theme.spacing(1)
   },
-  deleted: {
+  offerPrice: {
     textDecoration: 'line-through'
   }
 }))
@@ -29,13 +30,11 @@ const ProductDetail: React.FC<Product> = (props) => {
           <Typography variant="h4" color="error">
             On Sale
           </Typography>
-          <Box display="flex" justifyContent="space-around" flexGrow="1">
+          <Box display="flex">
             <Typography
               variant="h6"
               color="textSecondary"
-              style={{
-                textDecoration: 'line-through'
-              }}>
+              className={cls.offerPrice}>
               {`${currency} ${price}`}
             </Typography>
             <Typography variant="h4">{`${currency} ${offer.price}`}</Typography>
@@ -49,13 +48,14 @@ const ProductDetail: React.FC<Product> = (props) => {
     return <Typography variant="h4">{`${currency} ${price}`}</Typography>
   }
 
-  console.log(offer)
   return (
     <Container>
       <Box className={cls.content}>
         <Typography variant="h5">{title}</Typography>
         <ProductGallery images={images} />
         <Box>{viewPrice}</Box>
+
+        <QuestionForm />
       </Box>
     </Container>
   )
