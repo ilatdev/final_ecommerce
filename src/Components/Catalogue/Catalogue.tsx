@@ -6,7 +6,7 @@ import ProductCard from '../ProductCard'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     flexWrap: 'wrap',
     flexGrow: 1
   }
@@ -17,10 +17,12 @@ export default function Catalogue() {
   const { data } = useAppSelector(productsCount)
 
   return (
-    <Container maxWidth="lg">
-      <Box p={3} className={cls.root}>
+    <Container maxWidth="xl">
+      <Box m={1} p={1} className={cls.root}>
         {Object.values(data).map((product) => (
-          <ProductCard key={product.id} {...product} />
+          <Box key={product.id} my={1}>
+            <ProductCard {...product} />
+          </Box>
         ))}
       </Box>
     </Container>

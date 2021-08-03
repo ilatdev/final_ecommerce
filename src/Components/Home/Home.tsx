@@ -4,7 +4,7 @@ import ProductShuffle from './components/ProductShuffle'
 
 export default function Home() {
   return (
-    <Container>
+    <Container maxWidth="xl">
       <Banner />
       <ProductShuffle />
     </Container>

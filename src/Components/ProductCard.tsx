@@ -1,19 +1,37 @@
-import { Box, Button, makeStyles, Paper, Typography } from '@material-ui/core'
+import {
+  Box,
+  ButtonBase,
+  Divider,
+  makeStyles,
+  Typography
+} from '@material-ui/core'
+import { green } from '@material-ui/core/colors'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Product } from '../features/products/productsSlice'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 290
+    maxWidth: 300,
+    marginBottom: '1rem',
+    border: '1px solid #d2d1e4',
+    borderRadius: 5,
+    '& :hover': {
+      backgroundColor: '#e2e2e228'
+    }
   },
   content: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: theme.spacing(1),
-    margin: theme.spacing(1)
+    padding: 5
+  },
+  offer: {
+    color: green[500]
+  },
+  hrLine: {
+    backgroundColor: '#00000055'
   }
 }))
 
@@ -32,21 +50,25 @@ const ProductCard: React.FC<Product> = ({
     return history.push(`/product_detail/${id}`)
   }
 
-  const viewPrice = offer ? offer.price : price
-
   return (
-    <Box className={cls.root}>
-      <Paper className={cls.content}>
-        <Typography variant="subtitle1">{title}</Typography>
-        <img src={images[0]} width="100%" alt="product_image" loading="lazy" />
-        <Typography variant="button" color={offer ? 'error' : 'textSecondary'}>
-          {`${currency} ${viewPrice}`}
+    <ButtonBase onClick={goToProduct} className={cls.root}>
+      <Box>
+        <Box className={cls.content}>
+          <Typography variant="body1">{title}</Typography>
+          <img
+            src={images[0]}
+            width="100%"
+            alt="product_image"
+            loading="lazy"
+          />
+        </Box>
+        <Divider variant="fullWidth" />
+
+        <Typography variant="h5" className={offer ? cls.offer : ''}>
+          {`${currency}  ${offer?.price || price}`}
         </Typography>
-        <Button variant="contained" color="primary" onClick={goToProduct}>
-          Details
-        </Button>
-      </Paper>
-    </Box>
+      </Box>
+    </ButtonBase>
   )
 }
 
