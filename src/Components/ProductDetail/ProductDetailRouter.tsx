@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
-import { useAppSelector } from '../app/hooks'
-import { productsCount } from '../features/products/productsSlice'
+import { useAppSelector } from '../../app/hooks'
+import { productsCount } from '../../features/products/productsSlice'
 import Container from '@material-ui/core/Container'
 import ProductDetail from './ProductDetail'
 
