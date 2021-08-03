@@ -50,13 +50,15 @@ const ProductCard: React.FC<Product> = ({
     return history.push(`/product_detail/${id}`)
   }
 
+  const ramdomImage = `${images[0]}?id=${id + 8}`
+
   return (
     <ButtonBase onClick={goToProduct} className={cls.root}>
       <Box>
         <Box className={cls.content}>
           <Typography variant="body1">{title}</Typography>
           <img
-            src={images[0]}
+            src={ramdomImage}
             width="100%"
             alt="product_image"
             loading="lazy"
