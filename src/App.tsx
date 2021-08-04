@@ -25,20 +25,19 @@ function App() {
   return (
     <Router>
       <CoreLayout>
-        <LoadingCircle>
-          <Switch>
-            <Route path={`/product_detail/:id`}>
-              <ProductDetail />
-            </Route>
-            <Route path="/catalogue">
-              <Catalogue />
-            </Route>
-            <Route path="/home">
-              <Home />
-            </Route>
-            <Redirect exact from="/" to="/home" />
-          </Switch>
-        </LoadingCircle>
+        <LoadingCircle />
+        <Switch>
+          <Route path={`/product_detail/:id`}>
+            <ProductDetail />
+          </Route>
+          <Route path="/catalogue">
+            <Catalogue />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Redirect exact from="/" to="/home" />
+        </Switch>
       </CoreLayout>
     </Router>
   )

@@ -7,9 +7,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh'
-  },
-  main: {
-    flexGrow: 1
   }
 }))
 
@@ -18,7 +15,7 @@ const CoreLayout: React.FC = ({ children }) => {
   return (
     <Box className={cls.root}>
       <Navbar />
-      <Box className={cls.main}>{children}</Box>
+      {children}
       <Footer />
     </Box>
   )
