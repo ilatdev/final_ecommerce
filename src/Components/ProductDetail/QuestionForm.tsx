@@ -1,89 +1,99 @@
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import {
   Box,
   Button,
+  LinearProgress,
   TextareaAutosize,
   TextField,
   Typography
 } from '@material-ui/core'
+import { useEffect, useState } from 'react'
 
-interface IFormInputs {
+export interface NewQuestion {
   email: string
   question: string
 }
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
-  question: yup.string().min(10).max(150).required()
+  question: yup.string().min(10).max(500).required()
 })
 
-export default function QuestionForm() {
+interface QuestionFormProps {
+  onSubmit: SubmitHandler<NewQuestion>
+}
+
+const QuestionForm: React.FC<QuestionFormProps> = ({ onSubmit }) => {
+  const [successMessage, setSuccessMessage] = useState('')
   const {
+    register,
     handleSubmit,
-    control,
-    formState: { errors }
-  } = useForm<IFormInputs>({
+    reset,
+    formState: { errors, isSubmitting, isValid, isSubmitSuccessful }
+  } = useForm<NewQuestion>({
     mode: 'onChange',
     resolver: yupResolver(schema)
   })
-  const onSubmit = (data: IFormInputs) => console.log(data)
+
+  useEffect(() => {
+    if (isSubmitting) setSuccessMessage('')
+    if (isSubmitSuccessful) {
+      reset()
+      setSuccessMessage(
+        'Thanks! Your question about this product was sent succesfully'
+      )
+    }
+  }, [isSubmitting, isSubmitSuccessful, reset])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Box mt={1}>
-        <Controller
-          render={({ field }) => (
-            <TextField
-              onChange={field.onChange}
-              inputRef={field.ref}
-              error={!!errors.email}
-              variant="filled"
-              placeholder="your@email.com"
-            />
-          )}
+      <Box my={2}>
+        <TextField
           name="email"
-          control={control}
-          rules={{ required: true }}
+          inputProps={{ ...register('email') }}
+          error={!!errors.email}
+          disabled={isSubmitting}
+          variant="filled"
+          placeholder="your@email.com"
         />
-        <Box mt={1}>
-          <Typography color="error">
-            {errors.email && 'It must be a valid email'}
-          </Typography>
-        </Box>
-      </Box>
-      <Box mt={1}>
-        <Controller
-          render={({ field }) => (
-            <TextareaAutosize
-              onChange={field.onChange}
-              ref={field.ref}
-              spellCheck
-              placeholder={'Write your question here...'}
-              style={{
-                fontFamily: 'inherit',
-                fontSize: 'inherit',
-                padding: '12px 12px 10px',
-                border: 'none',
-                minWidth: 600,
-                minHeight: 100
-              }}
-            />
-          )}
-          name="question"
-          control={control}
-          rules={{ required: true }}
-        />
-      </Box>
-      <Box my={1}>
         <Typography color="error">
-          {errors.question && 'Must contain between 10 to 150 characters'}
+          {!!errors.email && 'It must be a valid email'}
         </Typography>
       </Box>
-      <Button variant="contained" color="primary" type="submit">
+      <Box my={2}>
+        <TextareaAutosize
+          {...register('question')}
+          name="question"
+          spellCheck
+          placeholder={'Write your question here...'}
+          disabled={isSubmitting}
+          style={{
+            fontFamily: 'inherit',
+            fontSize: 'inherit',
+            padding: '12px 12px 10px',
+            border: 'none',
+            minWidth: 600,
+            minHeight: 130,
+            resize: 'none'
+          }}
+        />
+        {isSubmitting && <LinearProgress />}
+        <Typography style={{ color: 'green' }}>{successMessage}</Typography>
+        <Typography color="error">
+          {!!errors.question && 'Must contain between 10 to 500 characters'}
+        </Typography>
+      </Box>
+      <Button
+        disabled={isSubmitting || !isValid}
+        variant="contained"
+        color="primary"
+        type="submit">
         Send
       </Button>
     </form>
   )
 }
+
+export default QuestionForm
