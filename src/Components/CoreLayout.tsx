@@ -3,19 +3,23 @@ import Footer from './Footer'
 import { Box, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  coreLayout: {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh'
+  },
+  main: {
+    marginTop: 90,
+    flexGrow: 1
   }
 }))
 
 const CoreLayout: React.FC = ({ children }) => {
   const cls = useStyles()
   return (
-    <Box className={cls.root}>
+    <Box className={cls.coreLayout}>
       <Navbar />
-      {children}
+      <Box className={cls.main}>{children}</Box>
       <Footer />
     </Box>
   )

@@ -1,41 +1,65 @@
-import { Toolbar, AppBar, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import Logo from './logo.png'
+import {
+  Toolbar,
+  AppBar,
+  Typography,
+  Container,
+  Box,
+  Button,
+  TextField,
+  InputAdornment
+} from '@material-ui/core'
+import Logo from './Logo.svg'
 import { Link } from 'react-router-dom'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
-  },
-  title: {
-    color: '#fff',
-    marginInline: '5px'
-  }
-}))
+import useStyles from './Navbar.styles'
+import { SearchRounded } from '@material-ui/icons'
 
 export default function Navbar() {
   const cls = useStyles()
+
   return (
-    <div className={cls.root}>
-      <AppBar position="static" variant="outlined">
-        <Toolbar>
-          <img src={Logo} width="50px" alt="brand_logo" />
-          <Typography
-            component={Link}
-            to="/home"
-            variant="h6"
-            className={cls.title}>
-            Home
-          </Typography>
-          <Typography
-            component={Link}
-            to="/catalogue"
-            variant="h6"
-            className={cls.title}>
-            Catalogo
-          </Typography>
+    <AppBar position="fixed" variant="outlined" className={cls.appBar}>
+      <Container>
+        <Toolbar disableGutters className={cls.toolBar}>
+          <Box className={cls.brand}>
+            <Box>
+              <img src={Logo} width="50px" alt="brand_logo" />
+            </Box>
+            <Typography variant="h6" component={Link} to="/">
+              Shop.com
+            </Typography>
+          </Box>
+
+          <Box className={cls.search}>
+            <TextField
+              margin="dense"
+              InputProps={{
+                disableUnderline: true,
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchRounded />
+                  </InputAdornment>
+                )
+              }}
+              fullWidth
+              placeholder="Products and Categories"
+            />
+          </Box>
+          <Box className={cls.navigation}>
+            <Typography component={Link} to="/home">
+              Home
+            </Typography>
+            <Typography component={Link} to="/catalogue">
+              Catalogue
+            </Typography>
+            <Typography component={Link} to="#">
+              Log in
+            </Typography>
+            <Button id="signup" variant="contained">
+              Sign up
+            </Button>
+          </Box>
         </Toolbar>
-      </AppBar>
-    </div>
+      </Container>
+    </AppBar>
   )
 }
