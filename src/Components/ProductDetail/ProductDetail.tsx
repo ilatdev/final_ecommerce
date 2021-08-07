@@ -106,7 +106,7 @@ const ProductDetail: React.FC<Product> = (props) => {
           {offer ? (
             viewPrice
           ) : (
-            <Typography variant="h6">{`${currency} ${price}`}</Typography>
+            <Typography variant="h4">{`${currency} ${price}`}</Typography>
           )}
           <Typography variant="body1">
             Dimensions: 10x50x30 <br /> Lorem Ipsum is simply dummy text Lorem
