@@ -1,4 +1,10 @@
-import { Box, IconButton, makeStyles } from '@material-ui/core'
+import {
+  Box,
+  Container,
+  IconButton,
+  makeStyles,
+  Paper
+} from '@material-ui/core'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import image1 from './banner1.jpg'
@@ -9,24 +15,31 @@ import { useEffect } from 'react'
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  banner: {
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
-    '& .MuiButtonBase-root': {
-      color: '#ffffff88'
+    borderRadius: '25px',
+    '& img': {
+      borderRadius: '25px'
     }
   },
   next: {
     position: 'absolute',
     right: 0,
     marginRight: 5,
-    zIndex: 1
+    zIndex: 1,
+    opacity: 0.5
   },
   back: {
     position: 'absolute',
     left: 0,
     marginLeft: '1rem',
-    zIndex: 1
+    zIndex: 1,
+    opacity: 0.5
   }
 }))
 
@@ -52,8 +65,8 @@ const Banner: React.FC = () => {
       : setBannerIndex(source.length - 1)
 
   return (
-    <div>
-      <Box className={cls.root}>
+    <Container className={cls.root}>
+      <Paper elevation={2} className={cls.banner}>
         <img src={source[bannerIndex]} width="100%" alt="banner_home" />
         <Box className={cls.next}>
           <label htmlFor="icon-button-right">
@@ -75,8 +88,8 @@ const Banner: React.FC = () => {
             </IconButton>
           </label>
         </Box>
-      </Box>
-    </div>
+      </Paper>
+    </Container>
   )
 }
 
