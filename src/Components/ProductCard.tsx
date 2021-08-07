@@ -1,37 +1,43 @@
-import {
-  Box,
-  ButtonBase,
-  Divider,
-  makeStyles,
-  Typography
-} from '@material-ui/core'
-import { green } from '@material-ui/core/colors'
+import { Box, ButtonBase, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Product } from '../features/products/productsSlice'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  productCard: {
     maxWidth: 300,
-    marginBottom: '1rem',
-    border: '1px solid #d2d1e4',
-    borderRadius: 5,
-    '& :hover': {
-      backgroundColor: '#e2e2e228'
-    }
-  },
-  content: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 5
+    marginBottom: '1rem',
+    borderBottomWidth: 1,
+    borderBottomStyle: 'solid',
+    borderBottomColor: theme.palette.secondary.light,
+    borderRadius: 25,
+    boxShadow: theme.shadows[1],
+    backgroundColor: '#f7f7f7'
   },
-  offer: {
-    color: green[500]
+  media: {
+    maxWidth: '100%',
+    borderRadius: '25px 25px 0 0'
   },
-  hrLine: {
-    backgroundColor: '#00000055'
+  description: {
+    padding: theme.spacing(1)
+  },
+  title: {
+    fontWeight: 400
+  },
+  price: {
+    display: 'flex',
+    padding: theme.spacing(1),
+    justifyContent: 'center'
+  },
+  prevPrice: {
+    marginRight: 5,
+    fontSize: 12,
+    textDecoration: 'line-through'
+  },
+  offerPrice: {
+    color: '#08b179'
   }
 }))
 
@@ -52,25 +58,41 @@ const ProductCard: React.FC<Product> = ({
 
   const ramdomImage = `${images[0]}?id=${id + 8}`
 
-  return (
-    <ButtonBase onClick={goToProduct} className={cls.root}>
-      <Box>
-        <Box className={cls.content}>
-          <Typography variant="body1">{title}</Typography>
-          <img
-            src={ramdomImage}
-            width="100%"
-            alt="product_image"
-            loading="lazy"
-          />
-        </Box>
-        <Divider variant="fullWidth" />
+  const offerPrice = (
+    <>
+      <Typography className={cls.prevPrice}>
+        {`${currency}  ${price}`}
+      </Typography>
+      <Typography variant="h6" className={cls.offerPrice}>
+        {`${currency}  ${offer?.price}`}
+      </Typography>
+    </>
+  )
 
-        <Typography variant="h5" className={offer ? cls.offer : ''}>
-          {`${currency}  ${offer?.price || price}`}
-        </Typography>
+  return (
+    <Box
+      component={ButtonBase}
+      className={cls.productCard}
+      onClick={goToProduct}>
+      <Box>
+        <img
+          className={cls.media}
+          src={ramdomImage}
+          alt="product_image"
+          loading="lazy"
+        />
       </Box>
-    </ButtonBase>
+      <Box className={cls.description}>
+        <Typography className={cls.title}>{title}</Typography>
+        <Box className={cls.price}>
+          {offer ? (
+            offerPrice
+          ) : (
+            <Typography variant="h6">{`${currency}  ${price}`}</Typography>
+          )}
+        </Box>
+      </Box>
+    </Box>
   )
 }
 
