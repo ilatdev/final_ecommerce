@@ -1,13 +1,20 @@
 import { Box, makeStyles, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
+  footer: {
     height: 150,
-    padding: theme.spacing(2),
+    padding: '0 20px'
+  },
+  content: {
+    minHeight: '100%',
+    padding: '1rem',
     textAlign: 'center',
-    borderTop: '1px solid #3333',
-    backgroundColor: '#fafafa'
+    backgroundColor: theme.palette.secondary.main,
+    borderRadius: '25px 25px 0 0'
+  },
+  copyRight: {
+    color: theme.palette.text.secondary,
+    fontWeight: 500
   }
 }))
 
@@ -15,11 +22,12 @@ export default function Footer() {
   const cls = useStyles()
   const getYear = new Date()
   return (
-    <Box className={cls.root}>
-      <Typography variant="body2">
-        Copyright © Final e-commerce {getYear.getFullYear()}. All right
-        reserved.
-      </Typography>
+    <Box className={cls.footer}>
+      <Box className={cls.content}>
+        <Typography className={cls.copyRight} variant="caption">
+          Copyright © Shop.com {getYear.getFullYear()}. All right reserved.
+        </Typography>
+      </Box>
     </Box>
   )
 }
