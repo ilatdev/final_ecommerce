@@ -4,8 +4,8 @@ import * as yup from 'yup'
 import {
   Box,
   Button,
-  LinearProgress,
-  TextareaAutosize,
+  CircularProgress,
+  makeStyles,
   TextField,
   Typography
 } from '@material-ui/core'
@@ -15,6 +15,29 @@ export interface NewQuestion {
   email: string
   question: string
 }
+
+const useStyles = makeStyles((theme) => ({
+  questionForm: {
+    padding: '1rem 0'
+  },
+  questionEmail: {
+    minWidth: 300,
+    marginTop: '1rem',
+    padding: '1rem',
+    borderRadius: 25,
+    backgroundColor: '#f7f7f7'
+  },
+  questionTextArea: {
+    minWidth: 300,
+    minHeight: 130,
+    marginTop: '1rem',
+    padding: '1rem',
+    border: 'none',
+    resize: 'none',
+    borderRadius: 25,
+    backgroundColor: '#f7f7f7'
+  }
+}))
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -26,6 +49,7 @@ interface QuestionFormProps {
 }
 
 const QuestionForm: React.FC<QuestionFormProps> = ({ onSubmit }) => {
+  const cls = useStyles()
   const [successMessage, setSuccessMessage] = useState('')
   const {
     register,
@@ -48,51 +72,47 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ onSubmit }) => {
   }, [isSubmitting, isSubmitSuccessful, reset])
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Box my={2}>
+    <Box py={2}>
+      <Typography variant="h5">Have a question? Search for answers </Typography>
+      <form onSubmit={handleSubmit(onSubmit)} className={cls.questionForm}>
         <TextField
           name="email"
           inputProps={{ ...register('email') }}
+          InputProps={{ disableUnderline: true }}
           error={!!errors.email}
           disabled={isSubmitting}
-          variant="filled"
           placeholder="your@email.com"
+          className={cls.questionEmail}
         />
-        <Typography color="error">
-          {!!errors.email && 'It must be a valid email'}
-        </Typography>
-      </Box>
-      <Box my={2}>
-        <TextareaAutosize
-          {...register('question')}
+        <Box pl={2}>
+          <Typography color="error">
+            {!!errors.email && 'It must be a valid email'}
+          </Typography>
+        </Box>
+        <TextField
           name="question"
-          spellCheck
-          placeholder={'Write your question here...'}
+          inputProps={{ ...register('question') }}
+          InputProps={{ disableUnderline: true }}
           disabled={isSubmitting}
-          style={{
-            fontFamily: 'inherit',
-            fontSize: 'inherit',
-            padding: '12px 12px 10px',
-            border: 'none',
-            minWidth: 600,
-            minHeight: 130,
-            resize: 'none'
-          }}
+          placeholder="Write your question here..."
+          className={cls.questionTextArea}
+          multiline
         />
-        {isSubmitting && <LinearProgress />}
-        <Typography style={{ color: 'green' }}>{successMessage}</Typography>
-        <Typography color="error">
-          {!!errors.question && 'Must contain between 10 to 500 characters'}
-        </Typography>
-      </Box>
-      <Button
-        disabled={isSubmitting || !isValid}
-        variant="contained"
-        color="primary"
-        type="submit">
-        Send
-      </Button>
-    </form>
+        <Box pl={2} mb={2}>
+          <Typography style={{ color: 'green' }}>{successMessage}</Typography>
+          <Typography color="error">
+            {!!errors.question && 'Must contain between 10 to 500 characters'}
+          </Typography>
+        </Box>
+        <Button
+          disabled={isSubmitting || !isValid}
+          variant="contained"
+          color="secondary"
+          type="submit">
+          {isSubmitting ? <CircularProgress /> : 'Send'}
+        </Button>
+      </form>
+    </Box>
   )
 }
 
