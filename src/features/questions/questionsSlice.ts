@@ -13,7 +13,7 @@ export const sendNewQuestion = createAsyncThunk(
 )
 
 export interface Question {
-  custumer_name: string
+  customer_name: string
   question: string
   answer: string
   sent_at: string
