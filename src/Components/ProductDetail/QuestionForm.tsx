@@ -18,7 +18,7 @@ export interface NewQuestion {
 
 const useStyles = makeStyles((theme) => ({
   questionForm: {
-    padding: '1rem 0'
+    padding: '1rem'
   },
   questionEmail: {
     minWidth: 300,
@@ -72,7 +72,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ onSubmit }) => {
   }, [isSubmitting, isSubmitSuccessful, reset])
 
   return (
-    <Box py={2}>
+    <Box p={2}>
       <Typography variant="h5">Have a question? Search for answers </Typography>
       <form onSubmit={handleSubmit(onSubmit)} className={cls.questionForm}>
         <TextField
