@@ -1,17 +1,9 @@
-import {
-  Toolbar,
-  AppBar,
-  Typography,
-  Container,
-  Box,
-  Button,
-  TextField,
-  InputAdornment
-} from '@material-ui/core'
+import { Toolbar, AppBar, Typography, Container, Box } from '@material-ui/core'
 import Logo from './Logo.svg'
 import { Link } from 'react-router-dom'
 import useStyles from './Navbar.styles'
-import { SearchRounded } from '@material-ui/icons'
+import MobileNavigation from './MobileNavigation'
+import Navigation from './Navigation'
 
 export default function Navbar() {
   const cls = useStyles()
@@ -28,36 +20,8 @@ export default function Navbar() {
               Shop.com
             </Typography>
           </Box>
-
-          <Box className={cls.search}>
-            <TextField
-              margin="dense"
-              InputProps={{
-                disableUnderline: true,
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchRounded />
-                  </InputAdornment>
-                )
-              }}
-              fullWidth
-              placeholder="Products and Categories"
-            />
-          </Box>
-          <Box className={cls.navigation}>
-            <Typography component={Link} to="/home">
-              Home
-            </Typography>
-            <Typography component={Link} to="/catalogue">
-              Catalogue
-            </Typography>
-            <Typography component={Link} to="#">
-              Log in
-            </Typography>
-            <Button id="signup" variant="contained">
-              Sign up
-            </Button>
-          </Box>
+          <Navigation />
+          <MobileNavigation />
         </Toolbar>
       </Container>
     </AppBar>
