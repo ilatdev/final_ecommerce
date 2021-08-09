@@ -25,7 +25,9 @@ const useStyles = makeStyles((theme) => ({
     borderBottomStyle: 'solid',
     borderBottomColor: theme.palette.secondary.light,
     margin: '1rem 0',
-    padding: '3rem'
+    [theme.breakpoints.up(960)]: {
+      padding: '3rem'
+    }
   },
   productDetails: {
     display: 'flex',
@@ -33,10 +35,11 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap'
   },
   productDescription: {
-    maxWidth: 400,
-    flexShrink: 3,
-    minWidth: 375,
-    padding: '1rem'
+    width: '100%',
+    padding: '1rem',
+    [theme.breakpoints.up(1200)]: {
+      maxWidth: 400
+    }
   },
   onSale: {
     fontWeight: 800,

@@ -51,7 +51,7 @@ const QuestionsView: React.FC = () => {
   })
 
   return (
-    <Box py={2}>
+    <Box p={2}>
       <Typography variant="h5">Customer questions & answers </Typography>
       <Box py={2}>{QuestionWithAnswer}</Box>
     </Box>
